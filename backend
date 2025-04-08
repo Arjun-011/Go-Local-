@@ -1,0 +1,58 @@
+<?php
+// Database connection
+$conn = new mysqli("localhost", "root", "", "carpooling_db");
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Signup Logic
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['new_username'])) {
+    $username = $_POST['new_username'];
+    $password = password_hash($_POST['new_password'], PASSWORD_DEFAULT);
+    $stmt = $conn->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
+    $stmt->bind_param("ss", $username, $password);
+    if ($stmt->execute()) {
+        echo "Signup successful!";
+    } else {
+        echo "Error: " . $stmt->error;
+    }
+}
+
+// Login Logic
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'])) {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $stmt = $conn->prepare("SELECT password FROM users WHERE username = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows === 1) {
+        $row = $result->fetch_assoc();
+        if (password_verify($password, $row['password'])) {
+            echo "Login successful!";
+        } else {
+            echo "Invalid password.";
+        }
+    } else {
+        echo "User not found.";
+    }
+}
+
+// Create Ride Logic
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['pickup'])) {
+    $pickup = $_POST['pickup'];
+    $destination = $_POST['destination'];
+    $passengers = $_POST['passengers'];
+    $price = $_POST['price'];
+    $date = $_POST['date'];
+    $stmt = $conn->prepare("INSERT INTO rides (pickup, destination, passengers, price, date) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssids", $pickup, $destination, $passengers, $price, $date);
+    if ($stmt->execute()) {
+        echo "Ride created successfully!";
+    } else {
+        echo "Error: " . $stmt->error;
+    }
+}
+
+$conn->close();
+?>

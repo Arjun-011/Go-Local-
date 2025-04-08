@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GoLocal - Book Your Ride</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+        }
+
+        .navbar {
+            background-color: #6B46C1;
+            padding: 1rem 2rem;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #6B46C1;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #4A5568;
+            font-weight: 500;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #CBD5E0;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #6B46C1;
+            box-shadow: 0 0 0 3px rgba(107, 70, 193, 0.2);
+        }
+
+        .search-btn {
+            background-color: #6B46C1;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2s;
+        }
+
+        .search-btn:hover {
+            background-color: #553C9A;
+        }
+
+        .available-rides {
+            margin-top: 2rem;
+            border-top: 2px solid #E2E8F0;
+            padding-top: 2rem;
+        }
+
+        .ride-card {
+            border: 1px solid #E2E8F0;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ride-info {
+            flex-grow: 1;
+        }
+
+        .ride-price {
+            color: #6B46C1;
+            font-weight: bold;
+            font-size: 1.25rem;
+        }
+
+        .book-btn {
+            background-color: #6B46C1;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 1rem;
+        }
+
+        .book-btn:hover {
+            background-color: #553C9A;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 1rem;
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">GoLocal</div>
+        <div>Campus Carpooling</div>
+    </nav>
+
+    <div class="container">
+        <h1>Book Your Ride</h1>
+        
+        <form id="search-form" action="search_rides.php" method="POST">
+            <div class="form-group">
+                <label for="pickup">Pickup Location</label>
+                <input type="text" id="pickup" name="pickup" placeholder="Enter pickup location" required>
+            </div>
+        
+            <div class="form-group">
+                <label for="destination">Destination</label>
+                <input type="text" id="destination" name="destination" placeholder="Enter destination" required>
+            </div>
+        
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+        
+            <div class="form-group">
+                <label for="passengers">Number of Passengers</label>
+                <input type="number" id="passengers" name="passengers" min="1" required>
+            </div>
+        
+            <button type="submit" class="search-btn">Search for Rides</button>
+        
+        <form id="search-form" action="search_rides.php" method="POST">
+
+        
+        <div class="available-rides" id="available-rides">
+            <!-- Rides will appear here after search -->
+        </div>
+        
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    document.getElementById("search-form").addEventListener("submit", function(e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+
+        fetch("search_rides.php", {
+            method: "POST",
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            console.log("Server Response:", data);  // Debug output in console
+            document.getElementById("available-rides").innerHTML = data;
+        })
+        .catch(error => console.error("Error:", error));
+    });
+</script>
+

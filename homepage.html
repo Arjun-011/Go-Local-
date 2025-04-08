@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoLocal - Campus Carpooling</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        :root {
+            --purple-dark: #581c87;
+            --purple-main: #7e22ce;
+            --purple-light: #a855f7;
+            --purple-lighter: #f3e8ff;
+        }
+
+        body {
+            background-color: white;
+            color: var(--purple-dark);
+        }
+
+        .navbar {
+            background-color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(88, 28, 135, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--purple-dark);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--purple-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--purple-main);
+        }
+
+        .hero {
+            background-color: var(--purple-dark);
+            color: white;
+            padding: 8rem 2rem 6rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .button-primary {
+            background-color: white;
+            color: var(--purple-dark);
+        }
+
+        .button-primary:hover {
+            background-color: var(--purple-lighter);
+        }
+
+        .button-secondary {
+            border: 2px solid white;
+            color: white;
+        }
+
+        .button-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .features {
+            padding: 6rem 2rem;
+            background-color: white;
+        }
+
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            padding: 2rem;
+            border-radius: 12px;
+            background-color: white;
+            border: 2px solid var(--purple-lighter);
+            text-align: center;
+        }
+
+        .feature-icon {
+            background-color: var(--purple-lighter);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+
+        .feature-icon svg {
+            width: 30px;
+            height: 30px;
+            stroke: var(--purple-main);
+        }
+
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: var(--purple-dark);
+        }
+
+        .feature-card p {
+            color: var(--purple-main);
+            line-height: 1.6;
+        }
+
+        footer {
+            background-color: var(--purple-lighter);
+            padding: 2rem;
+            text-align: center;
+            color: var(--purple-dark);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="#" class="logo">GoLocal</a>
+            <div class="nav-links">
+                <a href="#features">How It Works</a>
+                <a href="#safety">Safety</a>
+                <a href="signup.html">Sign Up</a>
+                <a href="index.html">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Share Rides, Save Money, Make Friends</h1>
+            <p>Connect with fellow students for safe and affordable campus carpooling. Join the community of smart travelers today!</p>
+            <div class="cta-buttons">
+                <a href="rides.html" class="button button-primary">Get Started</a>
+                <a href="#features" class="button button-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                        <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                    </svg>
+                </div>
+                <h3>Easy Scheduling</h3>
+                <p>Plan your rides in advance or find last-minute trips with our flexible scheduling system.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                </div>
+                <h3>Campus Verified</h3>
+                <p>Connect only with verified students from your university for safe and trusted rides.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2v6m0 12v2M4.93 4.93l4.24 4.24m5.66 5.66l4.24 4.24M2 12h6m12 0h2M4.93 19.07l4.24-4.24m5.66-5.66l4.24-4.24"/>
+                    </svg>
+                </div>
+                <h3>Split Costs</h3>
+                <p>Share travel expenses easily with our built-in cost calculator and payment system.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 GoLocal. All rights reserved.</p>
+    </footer>
+</body>
+</html>
